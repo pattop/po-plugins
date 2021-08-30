@@ -1,0 +1,44 @@
+#!/usr/bin/octave -f
+
+pkg load signal;
+
+input = argv(){1};
+[~, name] = fileparts(input);
+
+[y, fs] = audioread(input);
+[h, hf] = freqz(y, 1, 65536, fs);
+[g, gf] = grpdelay(y, 1, 65536, fs);
+gain_db = mag2db(abs(h));
+phase = rad2deg(unwrap(angle(h)));
+grpdelay_ms = g / fs * 1000;
+
+fig = figure("Name", input, "position", [0, 0, 400, 800]);
+
+subplot(3, 1, 1);
+plot(hf, gain_db);
+set(gca, "XScale", "log");
+grid on;
+title("Frequency Response");
+xlabel("Frequency (Hz)");
+ylabel("Magnitude (dB)");
+axis([1, fs/2, -20, 20]);
+
+subplot(3, 1, 2);
+plot(hf, phase);
+set(gca, "XScale", "log");
+grid on;
+title("Phase Response");
+xlabel("Frequency (Hz)");
+ylabel("Phase (degrees)");
+axis([1, fs/2, -180, 180]);
+
+subplot(3, 1, 3);
+plot(gf, grpdelay_ms);
+set(gca, "XScale", "log");
+grid on;
+title("Group Delay");
+xlabel("Frequency (Hz)");
+ylabel("Group Delay (ms)");
+axis([1, fs/2, 0, 10]);
+
+print(fig, [name ".png"], "-dpng");
