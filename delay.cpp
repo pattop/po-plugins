@@ -61,7 +61,7 @@ run(LADSPA_Handle h, unsigned long samples)
 		auto out = p->io[i][1];
 		/* stop on first unconnected port */
 		if (!in || !out)
-			return;
+			break;
 		/* careful, input and output can overlap */
 		/* REVISIT: this could probably be a bit more optimal.. */
 		auto &data = p->data[i];
