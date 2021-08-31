@@ -56,6 +56,8 @@ void
 activate(LADSPA_Handle h)
 {
 	filter *p = reinterpret_cast<filter *>(h);
+
+	/* see https://www.linkwitzlab.com/filters.htm */
 	switch (p->order) {
 	case 2:
 		p->bqc.lpf(p->f0, 0.5, p->fs);

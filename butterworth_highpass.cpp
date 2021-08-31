@@ -57,6 +57,8 @@ void
 activate(LADSPA_Handle h)
 {
 	filter *p = reinterpret_cast<filter *>(h);
+
+	/* See https://www.earlevel.com/main/2016/09/29/cascading-filters */
 	switch (p->order) {
 	case 1:
 		p->bqc1.hpf1(p->f0, p->fs);
