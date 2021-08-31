@@ -34,10 +34,15 @@ connect_port(LADSPA_Handle h, unsigned long port, LADSPA_Data *d)
 	switch (port) {
 	case 0:
 		p->delay = std::round(*d / 1000.0 * p->fs);
-		if (p->delay > max_delay) {
+		if (p->delay == 0) {
+			fprintf(stderr, "WARNING: Minimum delay is %.2fms at %luHz. Clamping.\n",
+				1.0 / p->fs, p->fs);
+			p->delay = 1;
+		}
+		if (p->delay >= max_delay) {
 			fprintf(stderr, "WARNING: Maximum delay is %.2fms at %luHz. Clamping.\n",
-			        1.0 * max_delay / p->fs, p->fs);
-			p->delay = max_delay;
+			        (max_delay - 1.0) / p->fs, p->fs);
+			p->delay = max_delay - 1;
 		}
 		return;
 	}
