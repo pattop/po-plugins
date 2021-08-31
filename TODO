@@ -1,0 +1,6 @@
+More documentation
+ * how to build/install
+ * how to test
+ * Example asound.conf
+Dynamically allocate delay line
+Deduplicate the boilerplate
