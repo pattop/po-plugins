@@ -5,7 +5,7 @@
 #include <cstdio>
 #include <numbers>
 
-#define dbg(...) printf(__VA_ARGS__)
+#define dbg(...)
 
 /*
  * biquad::run - run biquad filter across sample data
