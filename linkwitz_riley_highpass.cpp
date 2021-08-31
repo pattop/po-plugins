@@ -114,7 +114,7 @@ constexpr std::array<LADSPA_PortDescriptor, control + 2 * channels> ports = {
 };
 constexpr std::array<const char *, size(ports)> port_names = {
 	"Crossover Frequency (Hz)",
-	"Order (2, 4 or 8)",
+	"Order",
 	"Channel 1 Input",
 	"Channel 1 Output",
 	"Channel 2 Input",
