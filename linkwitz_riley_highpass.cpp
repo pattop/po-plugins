@@ -60,7 +60,7 @@ activate(LADSPA_Handle h)
 	/* see https://www.linkwitzlab.com/filters.htm */
 	switch (p->order) {
 	case 2:
-		p->bqc.hpf(p->f0, 0.7, p->fs);
+		p->bqc.hpf(p->f0, 0.5, p->fs);
 		break;
 	case 4:
 		p->bqc.hpf(p->f0, std::cos(std::numbers::pi / 4.0), p->fs);
